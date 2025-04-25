@@ -1,7 +1,19 @@
+using SqlInjectionDemo.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlite("Data Source=boltonDB.db"));
+
+
+using (var scope = app.Services.CreateScope())
+{
+    var 
+}
 
 var app = builder.Build();
 
