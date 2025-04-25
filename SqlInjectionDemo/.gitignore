@@ -1,4 +1,37 @@
+# Build files
 bin/
 obj/
-.vscode/
+*.user
+*.vspscc
+*.vssscc
+
+# SQLite DB file
 *.db
+
+# User-specific settings
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Rider / VS Code / VS for Mac
+.idea/
+.vscode/
+*.code-workspace
+
+# ASP.NET Core Secrets
+secrets.json
+
+# EF Migrations
+Migrations/
+
+# Logs
+*.log
+
+# Publish outputs
+publish/
+
+# Other
+project.lock.json
+project.fragment.lock.json
