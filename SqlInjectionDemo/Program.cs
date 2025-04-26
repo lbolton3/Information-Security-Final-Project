@@ -10,12 +10,23 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=boltonDB.db"));
 
 
-using (var scope = app.Services.CreateScope())
-{
-    var 
-}
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<SqlInjectionDemo.Models.AppDbContext>();
+    if(!db.Users.Any())
+    {
+        db.Users.Add(new SqlInjectionDemo.Models.User
+        {
+            Username = "testuser", PasswordHash = "testuser13579"
+
+
+        });
+        db.SaveChanges();
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
