@@ -29,8 +29,8 @@ namespace SqlInjectionDemo.Pages
 
         public void OnPost()
         {
-            var username = Request.Form["username"];
-            var password = Request.Form["password"];
+            var username = Request.Form["username"].ToString();;
+            var password = Request.Form["password"].ToString();;
 
             // validating inputs made by user
             if(string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
