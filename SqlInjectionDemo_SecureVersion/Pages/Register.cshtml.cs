@@ -44,7 +44,7 @@ namespace SqlInjectionDemo.Pages
             
             cmd.CommandText = "INSERT INTO Users (Username, PasswordHash) VALUES (@username, @password)";
             cmd.Parameters.AddWithValue("@username", username);
-            cmd.Parameters.AddWithValue("@password", hashedPassword);
+            cmd.Parameters.AddWithValue("@password", hashPassword);
 
             
             try

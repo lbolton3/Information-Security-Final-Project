@@ -48,8 +48,8 @@ namespace SqlInjectionDemo.Pages
 
             cmd.CommandText = "SELECT * FROM Users WHERE Username = @username AND PasswordHash = @password";
             cmd.Parameters.AddWithValue("@username", username);
-            cmd.Parameters.AddWithValue("@password", hashedPassword);
-            
+            cmd.Parameters.AddWithValue("@password", hashPassword);
+
             var reader = cmd.ExecuteReader();
 
             Message = reader.HasRows ? "Login successful" : "Invalid login credentials.";
