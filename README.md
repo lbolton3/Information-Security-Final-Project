@@ -1,6 +1,6 @@
 # Information-Security-Final-Project
 
-#Technologies:
+# Technologies:
 C# 9.0
 
 ASP.NET Core Razor Pages
