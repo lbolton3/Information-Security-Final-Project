@@ -1,0 +1,18 @@
+@page
+@model SqlInjectionDemo.Pages.RegisterModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h2>Register</h2>
+
+<form method="post">
+    <label>Username:</label>
+    <input name="username"/><br/>
+    <label>Password:</label>
+    <input name="password" type="password"/><br/>
+    <button type="submit">Register</button>
+</form>
+
+<p>@Model.Message</p>
