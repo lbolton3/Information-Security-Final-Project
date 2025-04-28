@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 
 
 namespace SqlInjectionDemo.Pages
@@ -21,7 +22,7 @@ namespace SqlInjectionDemo.Pages
         [BindProperty]
         public string Message { get; set; }
 
-        public void OnPost()
+        public async Task OnPost()
         {
             var username = Request.Form["username"].ToString();;
             var password = Request.Form["password"].ToString();;
@@ -33,7 +34,6 @@ namespace SqlInjectionDemo.Pages
                 Message = "Username and password cannot be empty.";
                 return;
             }
-
             var hashPassword = HashedPassword(password);
 
             //
@@ -43,7 +43,8 @@ namespace SqlInjectionDemo.Pages
             
             
             cmd.CommandText = "INSERT INTO Users (Username, PasswordHash) VALUES (@username, @password)";
-            cmd.Parameters.AddWithValue("@username", username);
+            var encryptedUsername = Encrypt(username);
+            cmd.Parameters.AddWithValue("@username", encryptedUsername);
             cmd.Parameters.AddWithValue("@password", hashPassword);
 
             
@@ -65,6 +66,50 @@ namespace SqlInjectionDemo.Pages
             byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
             return Convert.ToBase64String(bytes);
         }
+
+        // AES-256 Encryption/Decryption functions
+
+        private static string Encrypt(string plainText)
+        {
+            byte[] key = Encoding.UTF8.GetBytes("12345678901234567890123456789012");
+            byte[] iv = Encoding.UTF8.GetBytes("1234567890123456");
+
+            using var aes = Aes.Create();
+            aes.KeySize = 256;
+            aes.Key = key;
+            aes.IV = iv;
+
+            using var encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
+            using var ms = new MemoryStream();
+            using(var cs = new CryptoStream(ms,encryptor,CryptoStreamMode.Write))
+            using (var sw = new StreamWriter(cs))
+            {
+                sw.Write(plainText);
+            }
+            return Convert.ToBase64String(ms.ToArray());
+        }
+
+        private static string Decrypt(string cipherText)
+        {
+            byte[] key = Encoding.UTF8.GetBytes("12345678901234567890123456789012");
+            byte[] iv = Encoding.UTF8.GetBytes("1234567890123456");
+
+            using var aes = Aes.Create();
+            aes.KeySize = 256;
+            aes.Key = key;
+            aes.IV = iv;
+
+            using var decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+            var CipherBits = Convert.FromBase64String(cipherText);
+
+            using var ms = new MemoryStream(CipherBits);
+            using var cs  = new CryptoStream(ms,decryptor,CryptoStreamMode.Read);
+            using var sr = new StreamReader(cs);
+
+            return sr.ReadToEnd();
+        }
+
+
 
     }
 }
