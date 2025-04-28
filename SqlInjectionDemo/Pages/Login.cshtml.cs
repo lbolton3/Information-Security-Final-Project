@@ -32,11 +32,13 @@ namespace SqlInjectionDemo.Pages
             var connection = context_.Database.GetDbConnection();
             connection.Open();
             var cmd = connection.CreateCommand();
+
+            //vulnerable query(does not parametize the query)
             cmd.CommandText = $"SELECT * FROM Users WHERE Username = '{username}' AND PasswordHash = '{password}'";
             var reader = cmd.ExecuteReader();
 
             Message = reader.HasRows ? "Login successful" : "Invalid login credentials.";
-
+ 
             connection.Close();
         }
     }

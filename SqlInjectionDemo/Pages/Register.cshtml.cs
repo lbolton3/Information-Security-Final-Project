@@ -28,7 +28,7 @@ namespace SqlInjectionDemo.Pages
             connection.Open();
             var cmd = connection.CreateCommand();
             
-            // Inserting a new user (purposefully vulnerable to SQL injection attack)
+            //vulnerable query(does not parametize the query)
             cmd.CommandText = $"INSERT INTO Users (Username, PasswordHash) VALUES ('{username}', '{password}')";
             
             try
