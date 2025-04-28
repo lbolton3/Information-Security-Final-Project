@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite("Data Source=boltonDB.db"));
+    options.UseSqlite("Data Source=boltonDB2.db"));
 
 
 
