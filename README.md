@@ -17,6 +17,6 @@ NuGet, "Microsoft.EntityFrameworkCore.Sqlite" Package
 https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite/
 
 OpenAI, "ChatGPT Assistance"
-Used for coding support, project planning, cryptography guidance, and documentation refinement
+Used for coding support, project planning, cryptography guidance, SQL query setup
 
 https://youtu.be/PjCQpG48z5o?si=uWRCS7JIDQy9nxlV
