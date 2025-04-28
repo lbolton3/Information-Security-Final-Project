@@ -1,5 +1,31 @@
 # Information-Security-Final-Project
 
+#Technologies:
+C# 9.0
+
+ASP.NET Core Razor Pages
+
+SQLite Database
+
+Entity Framework Core + Microsoft.EntityFrameworkCore.Sqlite
+
+System.Security.Cryptography (AES-256 encryption, SHA-256 hashing)
+
+System.Text (UTF-8 encoding)
+
+Microsoft.Data.Sqlite (manual SQL command execution)
+
+.NET CLI Tools (dotnet run, dotnet ef)
+
+Visual Studio Code / Visual Studio
+
+SQLite3 Command Line (optional)
+
+Microsoft Documentation + OpenAI ChatGPT Assistance
+
+Youtube Video explaining how to work with Razor pages.
+
+
 # References
 Microsoft Docs, "Encrypting and Decrypting Data in .NET"
 https://learn.microsoft.com/en-us/dotnet/standard/security/encrypting-data
